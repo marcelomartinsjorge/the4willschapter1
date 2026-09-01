@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aheryn — The Light at the Edge of the World · The Four Wills</title>
+<meta name="description" content="An interactive dark fantasy chapter — read, listen, and watch the story of Aheryn, one of the last Lúmae, exiled at the edge of a frozen world.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Four Wills">
+<meta property="og:title" content="Aheryn — The Light at the Edge of the World">
+<meta property="og:description" content="An interactive dark fantasy chapter — read, listen, and watch the story of Aheryn, one of the last Lúmae, exiled at the edge of a frozen world.">
+<meta property="og:image" content="https://marcelomartinsjorge.github.io/the4willschapter1/assets/images/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://marcelomartinsjorge.github.io/the4willschapter1/">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aheryn — The Light at the Edge of the World">
+<meta name="twitter:description" content="An interactive dark fantasy chapter — read, listen, and watch the story of Aheryn, one of the last Lúmae, exiled at the edge of a frozen world.">
+<meta name="twitter:image" content="https://marcelomartinsjorge.github.io/the4willschapter1/assets/images/og-cover.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void: #090b0f;
+    --panel: #12161d;
+    --panel-2: #171c25;
+    --frost: #dbe1e5;
+    --frost-dim: #8b95a1;
+    --gold: #c6a15b;
+    --gold-soft: rgba(198,161,91,.35);
+    --turq: #5b9c93;
+    --turq-soft: rgba(91,156,147,.35);
+    --hairline: rgba(219,225,229,.1);
+    --zone-accent: var(--gold);
+    --zone-accent-soft: var(--gold-soft);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--void);
+    color:var(--frost);
+    font-family:'Spectral', Georgia, serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--gold-soft); color:#fff; }
+
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    font-size:.72rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  /* ---------- HERO / ENTRY ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    align-items:flex-end;
+    background:url('assets/images/hero.webp') center 22% / cover no-repeat;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(6,7,10,.15) 0%, rgba(6,7,10,.35) 45%, rgba(6,7,10,.92) 92%),
+      linear-gradient(90deg, rgba(6,7,10,.55) 0%, rgba(6,7,10,0) 35%, rgba(6,7,10,0) 65%, rgba(6,7,10,.55) 100%);
+  }
+  .hero-inner{
+    position:relative;
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+    padding:0 2rem 5.5rem;
+    text-align:center;
+  }
+  .hero h1{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:clamp(3rem, 9vw, 6.2rem);
+    letter-spacing:.06em;
+    margin:.5rem 0 .3rem;
+    color:#f3ede0;
+    text-shadow: 0 0 40px rgba(198,161,91,.35), 0 4px 30px rgba(0,0,0,.6);
+  }
+  .hero .subtitle{
+    font-family:'Cinzel',serif;
+    font-weight:500;
+    font-size:clamp(1rem,2.4vw,1.35rem);
+    letter-spacing:.12em;
+    color:var(--gold);
+    margin:0 0 2.4rem;
+  }
+  .hero .book-line{
+    font-family:'Jost',sans-serif;
+    font-size:.78rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--frost-dim);
+    margin:0 0 1.6rem;
+  }
+
+  .enter-btn{
+    position:relative;
+    font-family:'Jost',sans-serif;
+    font-size:.85rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:#f3ede0;
+    background:transparent;
+    border:1px solid var(--gold-soft);
+    padding:.95rem 2.3rem;
+    border-radius:2px;
+    cursor:pointer;
+    overflow:hidden;
+    transition:border-color .4s ease, color .4s ease, box-shadow .5s ease;
+  }
+  .enter-btn::before{
+    content:"";
+    position:absolute; left:-40%; top:0; bottom:0; width:35%;
+    background:linear-gradient(90deg, transparent, rgba(198,161,91,.5), transparent);
+    transform:skewX(-20deg);
+    transition:left 1.1s ease;
+  }
+  .enter-btn:hover{
+    border-color:var(--gold);
+    color:#fff;
+    box-shadow:0 0 24px rgba(198,161,91,.25);
+  }
+  .enter-btn:hover::before{ left:130%; }
+  .enter-btn .state{ font-family:'Spectral',serif; font-style:italic; opacity:.75; margin-left:.6em; letter-spacing:0; text-transform:none; font-size:.85em;}
+
+  .scroll-cue{
+    position:absolute; left:50%; bottom:1.6rem; transform:translateX(-50%);
+    font-family:'Jost',sans-serif; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--frost-dim); display:flex; flex-direction:column; align-items:center; gap:.5rem;
+    animation:bob 2.6s ease-in-out infinite; opacity:.8;
+  }
+  .scroll-cue .line{width:1px; height:26px; background:linear-gradient(var(--gold), transparent);}
+  @keyframes bob{ 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,6px);} }
+
+  /* ---------- READING COLUMN ---------- */
+  main{
+    max-width:680px;
+    margin:0 auto;
+    padding: 6.5rem 1.6rem 8rem;
+  }
+  .chapter-mark{
+    text-align:center;
+    margin-bottom:4rem;
+  }
+  .chapter-mark .eyebrow{ display:block; margin-bottom:.6rem; }
+  .chapter-mark h2{
+    font-family:'Cinzel',serif; font-size:1.5rem; letter-spacing:.05em; font-weight:600;
+    color:var(--frost); margin:0;
+  }
+
+  section.zone{ transition:color .6s ease; }
+
+  p{
+    font-size:1.14rem;
+    line-height:1.85;
+    color:var(--frost);
+    margin:0 0 1.55em;
+    letter-spacing:.005em;
+  }
+  p em{ color:#efe5cf; font-style:italic; }
+
+  p.first-p::first-letter{
+    font-family:'Cinzel',serif;
+    font-size:3.6rem;
+    font-weight:600;
+    float:left;
+    line-height:.85;
+    padding:.08em .12em 0 0;
+    color:var(--gold);
+    text-shadow:0 0 22px rgba(198,161,91,.4);
+  }
+
+  .divider{
+    text-align:center;
+    color:var(--zone-accent);
+    font-size:1.1rem;
+    letter-spacing:.5em;
+    margin:2.6rem 0 2.8rem;
+    opacity:.85;
+    transition:color .6s ease;
+  }
+
+  p.dialogue{
+    padding-left:1.1rem;
+    border-left:2px solid var(--zone-accent-soft);
+    color:#eef1f3;
+    transition:border-color .6s ease;
+  }
+
+  /* glossary inline links */
+  .gloss{
+    color:var(--zone-accent);
+    text-decoration:none;
+    border-bottom:1px dotted var(--zone-accent);
+    cursor:pointer;
+    padding-bottom:.03em;
+    transition:color .3s ease, border-color .3s ease, text-shadow .3s ease;
+  }
+  .gloss:hover{
+    text-shadow:0 0 10px var(--zone-accent-soft);
+  }
+
+  footer.endmark{
+    text-align:center;
+    margin-top:4.5rem;
+    color:var(--frost-dim);
+    font-family:'Jost',sans-serif;
+    font-size:.75rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+  }
+
+  /* ---------- AUDIO WIDGET ---------- */
+  .audio-widget{
+    position:fixed; right:1.1rem; bottom:1.1rem; z-index:40;
+    display:flex; align-items:center; gap:.65rem;
+    background:rgba(18,22,29,.88);
+    border:1px solid var(--hairline);
+    backdrop-filter:blur(8px);
+    padding:.6rem .9rem;
+    border-radius:999px;
+    font-family:'Jost',sans-serif;
+    box-shadow:0 8px 30px rgba(0,0,0,.4);
+  }
+  .audio-widget button{
+    all:unset; cursor:pointer; width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--panel-2); color:var(--frost);
+    border:1px solid var(--hairline);
+    transition:border-color .3s ease, color .3s ease;
+  }
+  .audio-widget button:hover{ border-color:var(--zone-accent); color:var(--zone-accent); }
+  .audio-widget .zone-label{
+    font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--frost-dim);
+    display:flex; flex-direction:column; line-height:1.25;
+  }
+  .audio-widget .zone-label b{ color:var(--zone-accent); font-weight:500; transition:color .5s ease; }
+  .bars{ display:flex; align-items:flex-end; gap:2px; height:12px; }
+  .bars i{ width:2px; background:var(--zone-accent); display:block; border-radius:1px; animation:eq 1.1s ease-in-out infinite; transition:background .5s ease;}
+  .bars i:nth-child(1){height:5px; animation-delay:-0.9s;}
+  .bars i:nth-child(2){height:11px; animation-delay:-0.5s;}
+  .bars i:nth-child(3){height:8px; animation-delay:-0.2s;}
+  .muted .bars i{ animation-play-state:paused; opacity:.25; }
+  @keyframes eq{ 0%,100%{height:3px;} 50%{height:12px;} }
+
+  /* ---------- CODEX MODAL ---------- */
+  .codex-overlay{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(6,7,10,.78);
+    backdrop-filter:blur(3px);
+    display:flex; align-items:center; justify-content:center;
+    padding:1.4rem;
+    opacity:0; pointer-events:none;
+    transition:opacity .35s ease;
+  }
+  .codex-overlay.open{ opacity:1; pointer-events:auto; }
+
+  .codex-card{
+    width:100%; max-width:560px;
+    background:var(--panel);
+    border:1px solid var(--hairline);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,.6), 0 0 0 1px rgba(198,161,91,.06);
+    transform:translateY(14px) scale(.98);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .codex-overlay.open .codex-card{ transform:translateY(0) scale(1); }
+
+  .codex-image-wrap{ position:relative; height:260px; overflow:hidden; background:var(--void); }
+  .codex-image-bg{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover;
+    filter:blur(26px) brightness(.55) saturate(1.15);
+    transform:scale(1.2);
+  }
+  .codex-image{
+    position:relative; z-index:1;
+    width:100%; height:100%;
+    object-fit:contain; object-position:center;
+    display:block;
+    filter:drop-shadow(0 10px 30px rgba(0,0,0,.5));
+  }
+  .codex-image-wrap::after{
+    content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+    background:linear-gradient(180deg, rgba(9,11,15,0) 55%, var(--panel) 100%);
+  }
+  .codex-close{
+    all:unset; position:absolute; top:.8rem; right:.8rem; z-index:2;
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(9,11,15,.55); color:#fff; cursor:pointer;
+    font-family:'Jost',sans-serif; font-size:1rem;
+    border:1px solid rgba(255,255,255,.15);
+  }
+  .codex-close:hover{ background:rgba(9,11,15,.85); }
+
+  .codex-body{ padding:1.6rem 1.8rem 1.3rem; }
+  .codex-eyebrow{ font-family:'Jost',sans-serif; font-size:.68rem; letter-spacing:.24em; text-transform:uppercase; color:var(--codex-accent, var(--gold)); margin-bottom:.35rem;}
+  .codex-title{ font-family:'Cinzel',serif; font-size:1.5rem; font-weight:600; margin:0 0 1rem; color:#f3ede0; }
+
+  .codex-pages{ position:relative; min-height:198px; }
+  .codex-page{ display:none; }
+  .codex-page.active{ display:block; }
+  .codex-page p{
+    font-size:1rem; line-height:1.72; color:var(--frost); margin:0 0 1em;
+  }
+  .codex-page p:last-child{ margin-bottom:0; }
+
+  .codex-foot{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--hairline);
+  }
+  .codex-nav{ all:unset; cursor:pointer; width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--frost); border:1px solid var(--hairline);
+    transition:border-color .3s ease, color .3s ease, opacity .3s ease;
+  }
+  .codex-nav:hover{ border-color:var(--codex-accent, var(--gold)); color:var(--codex-accent, var(--gold)); }
+  .codex-nav[disabled]{ opacity:.25; cursor:default; }
+  .codex-dots{ display:flex; gap:.4rem; }
+  .codex-dots span{ width:6px; height:6px; border-radius:50%; background:var(--hairline); transition:background .3s ease, transform .3s ease;}
+  .codex-dots span.active{ background:var(--codex-accent, var(--gold)); transform:scale(1.3); }
+
+  @media (max-width:560px){
+    main{ padding-top:4.5rem; }
+    .codex-image-wrap{ height:210px; }
+    .codex-body{ padding:1.3rem 1.3rem 1.1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001s !important; transition-duration:.15s !important; }
+    html{ scroll-behavior:auto; }
+  }
+
+  .snow-canvas{
+    position:fixed; inset:0; width:100vw; height:100vh;
+    z-index:8; pointer-events:none;
+    opacity:1;
+    transition:opacity 2.5s ease;
+  }
+  .snow-canvas.dimmed{ opacity:0; }
+
+  /* ---------- LANGUAGE ---------- */
+  .lang-content{ display:none; }
+  .lang-content.active{ display:block; }
+
+  .lang-toggle{
+    position:fixed; top:1.1rem; right:1.1rem; z-index:50;
+    display:flex; align-items:center;
+    background:rgba(18,22,29,.88);
+    border:1px solid var(--hairline);
+    backdrop-filter:blur(8px);
+    border-radius:999px;
+    padding:.25rem;
+    box-shadow:0 8px 30px rgba(0,0,0,.4);
+    font-family:'Jost',sans-serif;
+  }
+  .lang-toggle button{
+    all:unset; cursor:pointer;
+    font-size:.72rem; letter-spacing:.12em; font-weight:500;
+    padding:.45rem .85rem; border-radius:999px;
+    color:var(--frost-dim);
+    transition:background .3s ease, color .3s ease;
+  }
+  .lang-toggle button.active{
+    background:var(--panel-2);
+    color:var(--gold);
+  }
+
+  /* ---------- NARRATION CUE ---------- */
+  .narration-wrap{
+    display:flex; justify-content:center;
+    margin: -1.2rem 0 2.4rem;
+  }
+  .narration-cue{
+    all:unset; cursor:pointer;
+    display:flex; align-items:center; gap:.55rem;
+    font-family:'Jost',sans-serif;
+    font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--frost-dim);
+    border:1px solid var(--hairline);
+    padding:.55rem 1.1rem;
+    border-radius:999px;
+    opacity:0; transform:translateY(6px);
+    transition:opacity .6s ease, transform .6s ease, border-color .3s ease, color .3s ease, background .3s ease;
+  }
+  .narration-cue.visible{ opacity:1; transform:translateY(0); }
+  .narration-cue:hover{ border-color:var(--zone-accent); color:var(--zone-accent); }
+  .narration-cue.playing{
+    border-color:var(--zone-accent);
+    color:var(--zone-accent);
+    background:rgba(198,161,91,.06);
+  }
+  .nc-icon{
+    width:20px; height:20px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid currentColor;
+    flex-shrink:0;
+  }
+  .nc-icon svg{ width:9px; height:9px; }
+  .nc-eq{ display:flex; align-items:flex-end; gap:1.5px; height:9px; }
+  .nc-eq i{ width:1.5px; background:currentColor; border-radius:1px; display:block; animation:eq 1.1s ease-in-out infinite; }
+  .nc-eq i:nth-child(1){height:4px; animation-delay:-0.9s;}
+  .nc-eq i:nth-child(2){height:9px; animation-delay:-0.5s;}
+  .nc-eq i:nth-child(3){height:6px; animation-delay:-0.2s;}
+  .narration-cue:not(.playing) .nc-eq{ display:none; }
+  .narration-cue.playing .nc-play{ display:none; }
+
+  /* ---------- VIDEO SCENE ---------- */
+  .scene-cue{
+    all:unset; cursor:pointer;
+    display:flex; align-items:center; gap:.6rem;
+    font-family:'Jost',sans-serif;
+    font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--frost-dim);
+    border:1px solid var(--hairline);
+    padding:.55rem 1.1rem .55rem .55rem;
+    border-radius:999px;
+    transition:border-color .3s ease, color .3s ease;
+  }
+  .scene-cue:hover{ border-color:var(--zone-accent); color:var(--zone-accent); }
+  .scene-wrap{ display:flex; justify-content:center; margin:.4rem 0 2.2rem; }
+  .sc-thumb{
+    width:44px; height:30px; border-radius:4px; overflow:hidden; position:relative; flex-shrink:0;
+    background:#000;
+  }
+  .sc-thumb video{ width:100%; height:100%; object-fit:cover; }
+  .sc-thumb::after{
+    content:""; position:absolute; inset:0;
+    background:rgba(0,0,0,.25);
+  }
+  .sc-thumb .sc-play-ico{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:1;
+  }
+  .sc-play-ico svg{ width:9px; height:9px; fill:#fff; }
+
+  .video-overlay{
+    position:fixed; inset:0; z-index:110;
+    background:rgba(6,7,10,.88);
+    backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    padding:1.4rem;
+    opacity:0; pointer-events:none;
+    transition:opacity .35s ease;
+  }
+  .video-overlay.open{ opacity:1; pointer-events:auto; }
+  .video-card{
+    width:100%; max-width:920px;
+    background:#000;
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,.7), 0 0 0 1px rgba(198,161,91,.08);
+    position:relative;
+    transform:scale(.97);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .video-overlay.open .video-card{ transform:scale(1); }
+  .video-card video{ width:100%; display:block; aspect-ratio:16/9; background:#000; }
+  .video-close{
+    all:unset; position:absolute; top:.7rem; right:.7rem; z-index:2;
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(9,11,15,.6); color:#fff; cursor:pointer;
+    font-family:'Jost',sans-serif; font-size:1rem;
+    border:1px solid rgba(255,255,255,.15);
+  }
+  .video-close:hover{ background:rgba(9,11,15,.9); }
+  .video-caption{
+    font-family:'Jost',sans-serif; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--frost-dim); text-align:center; padding:.9rem 1rem;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="snowCanvas" class="snow-canvas" aria-hidden="true"></canvas>
+
+<div class="lang-toggle" id="langToggle">
+  <button data-lang="en" class="active">EN</button>
+  <button data-lang="pt">PT-BR</button>
+</div>
+
+<header class="hero" id="hero">
+  <div class="hero-inner">
+    <p class="book-line" data-en="The Four Wills · Book I" data-pt="As Quatro Vontades · Livro I">The Four Wills · Book I</p>
+    <p class="eyebrow" data-en="Chapter I" data-pt="Capítulo I">Chapter I</p>
+    <h1>Aheryn</h1>
+    <p class="subtitle" data-en="The Light at the Edge of the World" data-pt="A Luz na Borda do Mundo">The Light at the Edge of the World</p>
+    <button class="enter-btn" id="enterBtn"><span data-en="Enter the frozen world" data-pt="Entrar no mundo gelado">Enter the frozen world</span> <span class="state" id="enterState" data-en="✦ ambient sound" data-pt="✦ som ambiente">✦ ambient sound</span></button>
+  </div>
+  <div class="scroll-cue"><span class="line"></span><span data-en="scroll" data-pt="role">scroll</span></div>
+</header>
+
+<main>
+  <div class="lang-content active" data-lang="en" id="langBlockEN">
+  <div class="chapter-mark">
+    <span class="eyebrow">Chapter I</span>
+    <h2>Aheryn — The Light at the Edge of the World</h2>
+  </div>
+
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line1.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+  <section class="zone" data-zone="borda">
+    <p class="first-p">The snow that year came early, and came dry, the way it does when she's in a good mood. After so many decades living at the <span class="gloss" data-codex="borda-do-mundo">Edge of the World</span>, it's only natural that I've learned to read the moods of the Mother of Winter.</p>
+
+    <p>I was at the threshold, approaching the pit trap I use to catch penguins. The <span class="gloss" data-codex="aug">Aug</span> love the taste of penguin, but standing nearly 4 meters tall, they find it nearly impossible to catch one themselves. And they don't know how to build traps. The trade is simple: I gather hundreds of penguins and exchange them for other materials. Snow-bear hide, timber from the trees of Frigia, and, of course, liquor. Plenty of it.</p>
+
+    <p>At first I cared about the severity of the winter. Of course it's always cold here — or it always <em>was</em> — but when <span class="gloss" data-codex="gelunah">Gelunah</span> grew troubled by something, usually hunger, she made the place practically uninhabitable. Except for me… and for the Aug, the giants who are the only minimally conscious beings I've kept contact with for over 50 years. Gelunah is conscious too, of course, or something beyond that, if it can even be understood. But communicating with her is different — I wouldn't call it telepathy, more something spiritual. Something that I, as a <span class="gloss" data-codex="lumae">Lúmae</span>, must be careful not to feel. It was exactly that kind of deeper inquiry into the immaterial that led to the complete extinction of my kind, and it's the reason I've lived at the Edge of the World for five decades.</p>
+
+    <p>Sometimes I miss a more elaborate conversation — the Aug aren't known for great intellect. But that's the advantage: they don't care whether I'm a Lúmae or not, or whether I should join the rest of the world, richer in knowledge, in declaring me a mortal enemy of existence. Some years pass without me uttering a single word. I've learned, better than anyone, to silence my thoughts. I practically hibernate like a bear. That mastery over my own mind let me grow used to the cold, or simply stop feeling it. I learned to "not think" out of survival. As a Lúmae, my thoughts make me glow — we have golden veins beneath the skin that light up brightly with thought, brighter still when the thought is intense. It's an attention I can't afford to attract.</p>
+
+    <p>The cycle is almost always the same: they find me. They want to kill me because there's a reward for it, or because they're self-appointed protectors of the world, determined to end every practitioner of magic. What strikes me as odd is that everyone seems to forget the reason: they want to kill me precisely because I'm capable of casting magic — magic that protects me from attackers, and which for that very reason draws even more attention to me, leading others here. All that's left is to move on, to find a new hiding place. It's a vicious cycle.</p>
+
+    <p>But it's been 56 or 57 years here now. I'm truly grateful to Gelunah, but it's a feeling I shouldn't indulge, because it makes me glow, and I think, somehow, she knows that.</p>
+
+    <p>I reached the pit — a new colony had fallen in. A few were unfortunately still alive; it's strange, still feeling something at the sight of the animals dying, but it's these small things that still make me feel alive. Or at least capable of feeling.</p>
+
+    <p>But this time I felt something more — the cold changed, and something tightened in my chest.</p>
+
+    <p>She passed to the west, far off, over the most distant mountain. Beautiful, snow-white scales catching the weak sun, flying with a majesty, as if a Dragon could dance in the air. Bright eyes, a deep blue-violet, like precious stones. But melancholic all the same, sorrowful… and that's what gave me a knot in my stomach. As if she were warning me of something.</p>
+  <div class="scene-wrap">
+    <button class="scene-cue" data-video="assets/video/gelunah-flight.mp4">
+      <span class="sc-thumb"><span class="sc-play-ico"><svg viewBox="0 0 10 10"><polygon points="1,0 10,5 1,10"/></svg></span></span>
+      <span class="sc-label" data-en="Watch the scene" data-pt="Ver a cena">Watch the scene</span>
+    </button>
+  </div>
+
+
+    <p>It was only an instant; I watched her vanish toward the white north. When I gathered myself, I went back to the trap. I counted the penguins — it was enough.</p>
+  </section>
+
+  <div class="divider">✦</div>
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line2.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+
+  <section class="zone" data-zone="glaciar">
+    <p>I was walking toward the <span class="gloss" data-codex="glaciar-oco">Hollow Glacier</span>, something like a village for Aug society: a massive glacier, riddled with natural fissures and tunnels shaped by millennia of thaw and refreeze. It must be as old as Gelunah herself. The ice that forms it is different — turned turquoise-blue, hard as stone. It's beautiful. And it stinks.</p>
+
+    <p>I usually arrange things with their leader, Gromm the Tusk-Breaker — a title the Aug gave him themselves, for felling a Colossal Mammoth with his bare hands. But that night, the one who greeted me was a smaller giant named Nuuk. He said Gromm was having trouble with his gut.</p>
+
+    <p class="dialogue">— GROMM BELLY BAD, ALREADY SHIT OUT A BEAR. NUUK TALK TO YOU.</p>
+    <p class="dialogue">— Alright, Nuuk. I've come about the penguins, I have a hundred of them. I still have plenty of wood and hide back at my cabin. This season I only need fat and the spirit.</p>
+
+    <p>He didn't answer, just turned. However slow each of their steps may be, their sheer size forces me to run to keep up. Gromm was more polite, I thought — but it's just as well: when he told me the story of the Mammoth, it took him hours to say what a human child could explain in ten minutes.</p>
+
+    <p>I followed Nuuk through the tunnels. The Aug aren't numerous — even there, at the densest concentration of their population, I saw only 4 or 5 along the way. It's rare to see them talking among themselves, but I found myself curious, listening in on a conversation between two of them, even from many meters away.</p>
+
+    <p class="dialogue">— GROMM BE BAD.</p>
+    <p class="dialogue">— CAN NOT STAND.</p>
+    <p class="dialogue">— NEVER SEE GROMM LIKE THIS.</p>
+
+    <p>I asked Nuuk about Gromm's condition. The Aug, like the Grakh, have two stomachs and a remarkable capacity for digestion.</p>
+
+    <p class="dialogue">— Nuuk, what exactly did Gromm tell you? How is he?</p>
+    <p class="dialogue">— GROMM BE BAD.</p>
+    <p class="dialogue">— Can I see him?</p>
+    <p class="dialogue">— GROMM BE BAD.</p>
+    <p class="dialogue">— Maybe I can help him.</p>
+
+    <p>I don't know if I truly wanted to help him, but it seemed important to understand what had caused this in the largest of the Aug. I understood Nuuk would take me to Gromm when his steps hesitated and slowly changed direction.</p>
+  <div class="scene-wrap">
+    <button class="scene-cue" data-video="assets/video/glaciar-walk.mp4">
+      <span class="sc-thumb"><span class="sc-play-ico"><svg viewBox="0 0 10 10"><polygon points="1,0 10,5 1,10"/></svg></span></span>
+      <span class="sc-label" data-en="Watch the scene" data-pt="Ver a cena">Watch the scene</span>
+    </button>
+  </div>
+
+
+    <p>Gromm's "chamber" is a great heap of bones atop a pile of rocks and smaller bones, forming a natural plateau about 10 meters high, set somewhat apart from the center of the Hollow Glacier.</p>
+
+    <p>It was the first time I'd set foot there, and it wasn't the "architecture" that caught my attention, but dozens, maybe hundreds, of bronze fragments scattered across the ground, as if some enormous bronze deposit had been shattered. But since bronze deposits don't exist, and since the Aug don't know how to smelt or alloy copper and tin, it was deeply strange.</p>
+
+    <p class="dialogue">— What are these pieces of metal scattered on the ground, Nuuk?</p>
+    <p class="dialogue">— TRASH.</p>
+
+    <p>I figured the giant wouldn't help me solve that mystery, but soon I spotted Gromm, snorting, enormous, propped against the bones. He noticed me as I came closer, and shouted, clearly in pain.</p>
+
+    <p class="dialogue">— WHAT GROMM SAY, NUUK?! GROMM BAD, NOT WANT SEE NOBODY, NOT EVEN LITTLE ONE.</p>
+
+    <p>I didn't wait for Nuuk's reaction and answered.</p>
+
+    <p class="dialogue">— I came to help you, Gromm. I know your stomach's bad.</p>
+    <p class="dialogue">— IF LITTLE ONE WALK CLOSER TO GROMM, LITTLE ONE CRUSHED.</p>
+
+    <p>There was a viscous liquid running across the ground near Gromm, and it wasn't waste. It was blood. A great deal of blood.</p>
+
+    <p class="dialogue">— Are you hurt, Gromm?</p>
+
+    <p>He didn't answer, not in the way I expected. His response was to hurl a rock, bigger than my torso, straight at me. I dodged it by a hair.</p>
+
+    <p class="dialogue">— GO AWAY OR GROMM KILL.</p>
+
+    <p>It was more a warning from Nuuk than a threat. I could hear in his voice the fear he felt toward Gromm.</p>
+
+    <p class="dialogue">— Alright, let's go get the drink. I hope your stomach gets better, Gromm.</p>
+
+    <p>Nuuk said nothing more. He just led me back through the tunnels.</p>
+
+    <div class="divider" style="margin-top:2.6rem;">✦</div>
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line3.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+
+    <p style="margin-top:2.8rem;">The giant led me to where they store the spirit. The sight always makes me reconsider my drinking habit, but it's necessary for someone who cannot afford to think, like me:</p>
+
+    <p>Basically, they pull a sweet root out of the ice, chew it into a paste, and spit it into a wooden tub. Then they keep the tub near the warm fissures for a week. The mixture bubbles and turns into a watery liquid. They pour it into a hollow whale bone, seal it, and heat it in geyser steam. The alcohol vapor rises, passes through a tube made from the gut of some large animal — which, on that occasion, I chose not to identify or ask about — and drips out the other side, ready. Then comes the most disgusting part: they empty the bladder of another giant sea creature, wash it with snow, and stitch the opening shut with tendons. They pour the liquid in and tie off the entrance.</p>
+
+    <p>I opened my pack and took out my flasks — enough to last a whole year of drinking — and filled them. That night I was pleased, because I didn't feel the urge to gag.</p>
+  </section>
+
+  <div class="divider">✦</div>
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line4.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+
+  <section class="zone" data-zone="cabana">
+    <p>The cabin I live in is small on purpose. A table. A cot I never use for sleep — because I don't sleep. I stay still, eyes open, which is the closest my kind comes to rest, and let the night pass through me the way water passes through ice.</p>
+
+    <p>I drank.</p>
+
+    <p>The taste is like the kiss of a dead hearth. A clear, almost crystalline liquid, with the smell of spoiled game at the bottom and the roughness of a rusted nail.</p>
+
+    <p>I drank again, and it was one thought less.</p>
+
+    <p>There are nights when the urge to think is stronger — to relive the past century, to revisit good memories. When the Lúmae still existed. When I was my people's hero.</p>
+
+    <p>I drank again, and another thought was gone.</p>
+
+    <p>But I still wonder how much longer I can go on living like this, whether one day I won't throw my hands up and unleash every spell and curse I know I'm capable of casting.</p>
+
+    <p>By the fifth swallow, or the sixth, only a single thought remained. The Title. The title they gave me when I was the pride of an entire people, when my kind would gather to hear me speak, when being me was a good thing to be. They made a song out of me. A creature, at its peak, gets songs — and I got mine, and it was beautiful.</p>
+
+    <p>And I, drunk, alone, in the spiritual company of the Mother of Winter, did the one thing I do when the light inside me refuses to go out: I sang.</p>
+
+    <p>I sang low, in the language no one else in the world speaks anymore, the language that died in the mouths of those who once spoke it with me. A hymn to a man who saw farther than anyone of his people ever had, who looked where one should not look and came back whole, and taught the others to look too. The melody rose and my chest rose with it, and the light rose too, and this time I let it. I let myself glow, one night, because there's no one for a hundred leagues to catch the scent of an old man singing to himself.</p>
+
+    <p>I sang the whole hymn. Every verse that called me great.</p>
+
+    <p>Outside the cabin, the sky began to lighten without enthusiasm, the way it does in winter: a gradual paleness, like someone with no hurry to wake, and no particular reason to.</p>
+  </section>
+
+  <div class="divider">✦</div>
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line5.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+
+  <section class="zone" data-zone="tacets">
+    <p>I felt them before I heard them, and I heard them long before anyone else would have.</p>
+
+    <p>It was morning; I was crouched, gathering meltwater, when the ground changed the subject beneath my feet. It wasn't her. Her footstep I knew — vast, graceful, and cold. This was something else. Small. Regular. Heavy in a way that living things aren't: life walks crooked, rests, hesitates. This came in rhythm, metal and stone biting the frozen ground, one dry crack after another, all identical.</p>
+
+    <p>I set down the ladle. I went very still, the soles of my feet pressed to the ground, counting. Tacets.</p>
+
+    <p>Three. Three of them were coming.</p>
+
+    <p>And I knew what they were before I climbed up to see them outlined against the snow, because that rhythm was carved into me deeper than the dead language, deeper than the song. They were my people's work. We built the Tacets centuries ago, made of bronze and magic, to help with heavy labor. Today they live on their own, because no Lúmae remains.</p>
+
+    <p>Except I knew they were coming for me.</p>
+
+    <p>The first one saw me.</p>
+
+    <p>The smooth head turned, eyeless, and the points of light on its face brightened a shade, and the rhythm broke — broke for the first time, from three counts to four, faster, because the thing had a target now, and the target was me. The other two turned together. And this is where a brave man would have acted, done what I know how to do, what earned me a song: touch what is forbidden and undo the three of them in a single gesture, the way one clears three beads off an abacus.</p>
+
+    <p>I thought about it. For half a second, I thought about it.</p>
+
+    <p>It was long enough for the light to rise up my throat, offered, the great magic saying: <em>use me, this is what you're for, this is what you are</em>, and it was long enough for me to refuse it. Because the cycle would repeat itself again: I'd use magic, turn the bronze to ash, and have to leave, who knows where, once more.</p>
+
+    <p>But then her gaze came to mind — Gelunah's. And the feeling that moment brought with it. It was a farewell; somehow she knew, and I didn't want to keep living there, drawing trouble into her garden of ice.</p>
+
+    <p>I put my hand to the ground, her ground, her cold. My body glowed and I asked the ice, and the ice did me the courtesy of obeying.</p>
+
+    <p>The crust beneath the three Tacets split open.</p>
+  <div class="scene-wrap">
+    <button class="scene-cue" data-video="assets/video/tacets-ice.mp4">
+      <span class="sc-thumb"><span class="sc-play-ico"><svg viewBox="0 0 10 10"><polygon points="1,0 10,5 1,10"/></svg></span></span>
+      <span class="sc-label" data-en="Watch the scene" data-pt="Ver a cena">Watch the scene</span>
+    </button>
+  </div>
+
+
+    <p>Not with fury — with logic. A straight fissure, clean, geometric, the way my people liked things done, and the three of them dropped through the gash into the dark water below, the rhythm collapsing into a crash, the bronze swallowed by a cold so black not even bronze could swim through it.</p>
+
+    <p>I didn't destroy them. Bronze like that doesn't drown; they'll walk the bottom, blind, and someday climb out on some shore or other and take up the rhythm again.</p>
+
+    <p>That's when I thought of Gromm — the bronze shards scattered across the floor of his chamber, the blood, the rock that nearly struck me. Three Tacets don't cause that kind of wreckage. There must have been thirty, or near enough, and for some reason the Aug leader had wanted to destroy them before they reached me. I would never know for certain. I hoped, with no one to tell, that he was doing better.</p>
+
+    <p>I went in. I packed into a bag what fits in a bag when you've been doing this for a century: not much. The alcohol. I went back to the threshold one last time.</p>
+
+    <p>To the west, beneath the ice, the cold carried a familiar weight. She was near, or had been, or would be. With her, verb tenses were never certain. I didn't say goodbye. You don't say goodbye to a neighbor who'll outlast you by a thousand years after your road has turned to dust; that would be presumptuous of me. I just looked at the white north once, at length, the way you look at a landscape you don't yet miss, but know you will, in the years ahead.</p>
+
+    <p>Then I turned my back on the cold and headed south, where the world was warmer, and fuller of people, and therefore more dangerous.</p>
+
+    <p>I started walking. Ahead, the road; behind, one more place I had lived and that was never mine. Along the way, unhurried, I put out the light, one line at a time, rehearsing the next face — that of an old man with no story, one no one would ever sing about again.</p>
+  </section>
+
+  <footer class="endmark">End of Chapter I</footer>
+  </div>
+  <div class="lang-content" data-lang="pt" id="langBlockPT">
+  <div class="chapter-mark">
+    <span class="eyebrow">Capítulo I</span>
+    <h2>Aheryn — A Luz na Borda do Mundo</h2>
+  </div>
+
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line1.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+  <section class="zone" data-zone="borda">
+    <p class="first-p">A neve daquele ano chegou cedo, e chegou seca, do jeito que ela manda quando anda de bom humor. Depois de tantas décadas vivendo na Borda do Mundo, é natural para mim reconhecer o estado de espírito da Mãe do Inverno.</p>
+
+    <p>Eu estava na soleira, me aproximava da armadilha de cova que uso para capturar os pinguins. Os Aug adoram o sabor de pinguins, mas por terem quase 4 metros, é muito difícil capturarem um. E eles não sabem fazer armadilhas. O escambo é simples: eu junto centenas de pinguins e troco com eles por outros materiais. Pele de urso das neves, madeiras das árvores de Frígia e, claro, bebida alcóolica. Muita.</p>
+
+    <p>No início eu me importava com a severidade do inverno. Claro que por aqui é sempre frio — ou sempre <em>foi</em> frio — mas quando Gelunah se incomodava com algo, geralmente fome, ela tornava o ambiente praticamente inabitável. Exceto para mim… e para os Augs, os gigantes que são os únicos seres minimamente conscientes com quem mantenho contato há mais de 50 anos. Gelunah também é consciente, claro, ou mais do que isso, se for possível de entender. Mas a comunicação com ela é diferente — não diria telepatia, e sim algo espiritual. Algo que eu, como Lúmae, devo evitar sentir. Foi exatamente esse tipo de investigação mais profunda do imaterial que levou à extinção completa dos meus semelhantes, e é o motivo de eu viver na Borda do Mundo há cinco décadas.</p>
+
+    <p>Às vezes sinto falta de uma conversa mais elaborada — os Aug não são conhecidos por grande intelecto. Mas a vantagem é essa: não ligam se sou um Lúmae ou não, nem se deveriam se juntar ao resto do mundo, mais rico em conhecimento, para me declarar inimigo mortal da existência. Alguns anos passam sem eu proferir uma única palavra. Aprendi como ninguém a silenciar os pensamentos. Praticamente hiberno como um urso. Esse domínio sobre a própria mente me permitiu me acostumar com o frio, ou simplesmente deixar de sentí-lo. Aprendi a "não pensar" por sobrevivência. Como Lúmae, meus pensamentos me fazem brilhar — temos veias douradas sob a pele que acendem brilhosas com pensamentos, ainda mais fortes quando os pensamentos são intensos. É uma atenção que não posso ter o luxo de atrair.</p>
+
+    <p>O ciclo é quase sempre o mesmo: me localizam. Querem me matar porque são recompensados por isso, ou porque são justiceiros e protetores do mundo, decididos a acabar com todo praticante de magia. O que me estranha é que todos parecem esquecer o motivo: querem me matar justamente por eu ser capaz de lançar magia — magia que me protege dos agressores, e que por isso atrai ainda mais atenção para mim, guiando outros até aqui. Resta-me mudar de lugar, encontrar um novo esconderijo. É um ciclo vicioso.</p>
+
+    <p>Mas já são 56 ou 57 anos aqui. Sou realmente grato a Gelunah, mas é um sentimento que não devo nutrir, porque me faz brilhar e eu acho que, de algum modo, ela sabe disso.</p>
+
+    <p>Cheguei ao lado do poço, uma nova colônia tinha caído lá. Infelizmente ainda tinham alguns vivos, é estranho ainda sentir algum tipo de sentimento vendo os animais morrendo, mas são essas pequenas coisas que ainda me fazem me sentir vivo. Ou pelo menos com sentimentos.</p>
+
+    <p>Mas dessa vez eu senti algo a mais — o frio mudou, e alguma coisa se apertou no peito.</p>
+
+    <p>Ela passou a oeste, longe, sobre a montanha mais distante. Linda, escamas níveas, refletindo o sol fraco, voando de maneira majestosa, como se um Dragão fosse capaz de dançar no ar. Olhos brilhantes, de cor azul-violeta, parecendo pedras preciosas. Mas ao mesmo tempo melancólicos, tristes… e isso que me deu um nó na barriga. Como se ela me avisasse sobre algo.</p>
+  <div class="scene-wrap">
+    <button class="scene-cue" data-video="assets/video/gelunah-flight.mp4">
+      <span class="sc-thumb"><span class="sc-play-ico"><svg viewBox="0 0 10 10"><polygon points="1,0 10,5 1,10"/></svg></span></span>
+      <span class="sc-label" data-en="Watch the scene" data-pt="Ver a cena">Watch the scene</span>
+    </button>
+  </div>
+
+
+    <p>Foi só um instante, fiquei a vê-la sumir rumo ao norte branco. Quando me recompus, voltei à armadilha. Contei os pinguins, era o suficiente.</p>
+  </section>
+
+  <div class="divider">✦</div>
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line2.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+
+  <section class="zone" data-zone="glaciar">
+    <p>Caminhava em direção ao Glaciar Oco, uma espécie de vilarejo da sociedade dos Aug: uma geleira gigante, cheia de fendas e túneis naturais formados pelo degelo e recongelamento milenar. Deve ser tão antiga quanto Gelunah. O gelo que a forma é diferente — ficou azul-turquesa, duro como pedra. É bonito, mas fedido.</p>
+
+    <p>Geralmente faço o combinado com o líder deles, Gromm, o Quebra-Marfim — título dado a ele pelos próprios Aug por derrubar um Mamute Colossal com as próprias mãos. Mas naquela noite, quem me recepcionou foi um gigante menor, chamado Nuuk. Disse que Gromm estava com problemas de intestino.</p>
+
+    <p class="dialogue">— GROMM BARRIGA RUIM, JÁ CAGAR UM URSO. NUUK FALAR COM UCÊ.</p>
+    <p class="dialogue">— Certo, Nuuk. Vim falar dos pinguins, tenho uma centena deles. Ainda tenho na minha cabana muita madeira e pele. Nessa temporada preciso apenas de banha e o destilado.</p>
+
+    <p>Ele não respondeu, só se virou. Por mais lentos que sejam a cada passo, a estatura deles me obriga a correr para acompanhá-lo. Gromm era mais educado, pensei — mas melhor assim: quando me contou a história do Mamute, levou algumas horas para dizer o que uma criança humana explicaria em 10 minutos.</p>
+
+    <p>Segui Nuuk pelos túneis. Os Aug não são numerosos — mesmo ali, na maior concentração da população deles, vi cerca de 4 ou 5 pelo caminho. É muito raro vê-los conversando entre si, mas me vi curioso, ouvindo a conversa entre dois deles, mesmo a muitos metros de distância.</p>
+
+    <p class="dialogue">— GROMM TAR MAL.</p>
+    <p class="dialogue">— NUM CONSEGUIR FICAR DE PÉ.</p>
+    <p class="dialogue">— NUNCA VER GROMM ASSIM.</p>
+
+    <p>Questionei Nuuk sobre o mal-estar de Gromm. Os Augs, assim como os Grakh, possuem dois estômagos e uma capacidade incrível de digestão.</p>
+
+    <p class="dialogue">— Nuuk, o que exatamente Gromm te contou? Como ele está?</p>
+    <p class="dialogue">— GROMM TAR MAL.</p>
+    <p class="dialogue">— Posso ver ele?</p>
+    <p class="dialogue">— GROMM TAR MAL.</p>
+    <p class="dialogue">— Às vezes consigo ajudá-lo.</p>
+
+    <p>Não sei se realmente queria ajudá-lo, mas é importante entender o que causou esse mal-estar no maior dos Augs. Entendi que Nuuk me levaria até Gromm quando seu passo hesitou e lentamente mudou a direção do seu corpo.</p>
+  <div class="scene-wrap">
+    <button class="scene-cue" data-video="assets/video/glaciar-walk.mp4">
+      <span class="sc-thumb"><span class="sc-play-ico"><svg viewBox="0 0 10 10"><polygon points="1,0 10,5 1,10"/></svg></span></span>
+      <span class="sc-label" data-en="Watch the scene" data-pt="Ver a cena">Watch the scene</span>
+    </button>
+  </div>
+
+
+    <p>O "aposento" de Gromm é um grande amontoado de ossos sobre uma pilha de rochas e ossos menores, formando um platô natural de cerca de 10 metros de altura, um tanto afastado do centro do Glaciar Oco.</p>
+
+    <p>Foi a primeira vez que pisei ali, e não foi a "arquitetura" que me chamou a atenção, mas sim dezenas ou centenas de pedaços de bronze espalhados por todo o local, como se uma enorme jazida de bronze tivesse sido estilhaçada. Mas como uma jazida de bronze não existe, e como os Augs não sabem fundir nem unir cobre e estanho, aquilo era muito estranho.</p>
+
+    <p class="dialogue">— O que são esses pedaços de metal espalhados pelo chão, Nuuk?</p>
+    <p class="dialogue">— SUJEIRA.</p>
+
+    <p>Imaginava que o gigante não me ajudaria a solucionar aquele mistério, mas logo avistei Gromm, bufando, enorme, escorado nos ossos. Ele me notou quando me aproximei mais, e gritou, obviamente com dor.</p>
+
+    <p class="dialogue">— O QUE GROMM FALAR, NUUK?! GROMM MAL, NUM QUERER VER NINGUÉM, NEM PEQUENINO.</p>
+
+    <p>Não esperei a reação de Nuuk e respondi.</p>
+
+    <p class="dialogue">— Vim te ajudar, Gromm. Sei que está mal da barriga.</p>
+    <p class="dialogue">— SE PEQUENINO ANDAR MAIS PERTO DE GROMM, PEQUENINO ESMAGADO.</p>
+
+    <p>Havia um líquido viscoso escorrendo pelo chão próximo a Gromm, e não eram fezes. Era sangue, bastante sangue.</p>
+
+    <p class="dialogue">— Você está ferido, Gromm?</p>
+
+    <p>Ele não me respondeu, não da maneira que eu esperava. A reação dele foi jogar uma pedra, maior que meu torso, na minha direção. Desviei por pouco.</p>
+
+    <p class="dialogue">— IR EMBORA OU GROMM MATAR.</p>
+
+    <p>Foi mais um aviso do que uma ameaça de Nuuk. Percebi na voz dele o medo que sentia de Gromm.</p>
+
+    <p class="dialogue">— Certo, vamos buscar a bebida. Espero que melhore da dor de barriga, Gromm.</p>
+
+    <p>Nuuk não disse mais nada. Só me levou de volta pelos túneis.</p>
+
+    <div class="divider" style="margin-top:2.6rem;">✦</div>
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line3.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+
+    <p style="margin-top:2.8rem;">O gigante me levou até onde armazenam o destilado. A vista sempre me faz repensar meu hábito de beber, mas é necessário quando se é alguém que não pode pensar como eu:</p>
+
+    <p>Basicamente eles arrancam uma raiz doce do gelo, mastigam até virar pasta e cospem em uma tina de madeira. Em seguida, guardam a tina perto das fendas quentes por 1 semana. A mistura borbulha e vira um líquido aguado. Colocam o liquido dentro de um osso oco de baleia, tampam e aquecem no vapor do gêiser. O vapor do álcool sobe, passa por um tubo de tripa de algum animal grande — que na ocasião não procurei identificar nem perguntar — e pinga do outro lado, pronto. Aí chega a parte mais nojenta: eles esvaziam a bexiga de outro animal gigante marinho, lavam com neve e costuram a abertura com tendões. Despejam o líquido lá dentro e dão um nó na entrada.</p>
+
+    <p>Abri a minha mochila e retirei meus frascos — o suficiente para um ano inteiro de bebida — e os enchi. Aquela noite fiquei satisfeito porque não senti ânsia.</p>
+  </section>
+
+  <div class="divider">✦</div>
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line4.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+
+  <section class="zone" data-zone="cabana">
+    <p>A cabana em que moro é pequena de propósito. Uma mesa. Um catre que não uso para dormir — porque não durmo. Fico quieto, de olhos abertos, que é o mais perto do sono que a minha espécie alcança, e deixo a noite passar por mim como a água passa pelo gelo.</p>
+
+    <p>Bebi.</p>
+
+    <p>O sabor é o de um beijo de uma lareira apagada. Líquido límpido, quase cristalino e o cheiro do fundo de caça morta e a aspereza de um prego enferrujado.</p>
+
+    <p>Bebi de novo, e foi um pensamento de menos.</p>
+
+    <p>Há noites em que a vontade de pensar é mais forte, de reviver o século passado e reviver memórias boas. Quando os Lúmae existiam, quando eu era o herói do meu povo.</p>
+
+    <p>Bebi de novo, e mais um pensamento se foi.</p>
+
+    <p>Mas ainda questiono quanto tempo continuarei conseguindo viver assim, se um dia eu não jogarei minhas mãos para o alto e lançarei todas as magias e maldições que sei que sou capaz de lançar.</p>
+
+    <p>Ao quinto gole, ou ao sexto, apenas sobrava um único pensamento. O Título. Título que me deram quando eu era o orgulho de um povo inteiro, quando a minha gente se reunia para me ouvir, quando ser eu era uma coisa boa de ser. Fizeram de mim uma canção. Uma criatura, no auge, recebe canções, e eu recebi a minha, e ela era bonita.</p>
+
+    <p>E eu, bêbado, sozinho, na companhia espiritual da Mãe do Inverno, fiz a única coisa que faço quando a luz dentro de mim se recusa em apagar: cantei.</p>
+
+    <p>Cantei baixo, na língua que ninguém mais no mundo fala, a língua que morreu na boca dos que a falavam comigo. Um louvor a um homem que viu mais longe do que qualquer um do seu povo jamais vira, que olhou para onde não se deve olhar e voltou inteiro, e ensinou os outros a olhar. A melodia subia e o meu peito subia com ela, e a luz subiu também, e dessa vez eu deixei. Deixei brilhar, uma noite, porque não há ninguém em cem léguas para farejar um velho a cantar a si mesmo.</p>
+
+    <p>Cantei o louvor inteiro. Cada verso que me chamava de grande.</p>
+
+    <p>Do lado de fora da cabana, o céu começava a clarear sem entusiasmo, do modo que ele faz no inverno: uma palidez gradual, como quem não tem pressa de acordar e nem razão particular para o fazer.</p>
+  </section>
+
+  <div class="divider">✦</div>
+  <div class="narration-wrap">
+    <button class="narration-cue" data-audio="assets/audio/narration/line5.mp3">
+      <span class="nc-icon"><svg class="nc-play" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg><span class="nc-eq"><i></i><i></i><i></i></span></span>
+      <span class="nc-text" data-en="Listen to Aheryn" data-pt="Ouvir Aheryn">Listen to Aheryn</span>
+    </button>
+  </div>
+
+
+  <section class="zone" data-zone="tacets">
+    <p>Senti-os antes de os ouvir, e ouvi-os muito antes de qualquer outro os ouviria.</p>
+
+    <p>Foi pela manhã, estava de cócoras a recolher a água do degelo quando a terra mudou de assunto sob os meus pés. Não era ela. O passo dela eu conhecia, vasto, artístico e frio. Isto era outra coisa. Pequeno. Regular. Pesado de um jeito que a vida não é: a vida pisa torto, descansa, hesita. Aquilo vinha em compasso, metal e pedra mordendo o chão gelado, um estalo seco e outro e outro, todos iguais.</p>
+
+    <p>Pousei a concha. Fiquei muito quieto, com a planta dos pés colada à terra, a contar. Tacets.</p>
+
+    <p>Três. Vinham três.</p>
+
+    <p>E eu soube o que eram antes de subir ao alto e os ver recortados contra a neve, porque o compasso daquilo estava gravado em mim mais fundo do que a língua morta, mais fundo que a canção. Eram obra da minha gente. Criamos os Tacets séculos atrás, construídos a base de bronze e magia para nos ajudar nos serviços braçais. Hoje eles vivem por conta própria porque nenhum Lúmae existe mais.</p>
+
+    <p>Exceto e eu sei que vinham me buscar.</p>
+
+    <p>O primeiro me viu.</p>
+
+    <p>A cabeça lisa virou-se, sem olhos, e os pontos de luz na face acenderam-se um tom acima, e o compasso quebrou, quebrou pela primeira vez, de três para quatro, mais rápido, porque a coisa tinha um alvo agora e o alvo era eu. Os outros dois viraram-se juntos. E aqui é onde um homem corajoso teria agido, feito o que eu sei fazer, o que me valeu uma canção: tocar o que é proibido e desfazer aqueles três num gesto, como quem apaga três contas de um ábaco.</p>
+
+    <p>Pensei nisso. Por meio segundo, pensei.</p>
+
+    <p>Foi o tempo de a luz me subir pela garganta, oferecida, a magia grande a dizer: <em>usa-me, é para isto que serves, é isto que tu és</em>, e foi o tempo de eu a recusar. Porque novamente o ciclo se repetiria, usaria magia, transformaria o bronze em cinza e teria de partir, sei lá para onde, mais uma vez.</p>
+
+    <p>Mas em seguida me veio no pensamento o olhar dela, Gelunah. E o sentimento que aquele momento me trouxe. Era uma despedida, de algum modo ela sabia e eu não queria viver ali, atraindo problemas para seu jardim de gelo.</p>
+
+    <p>Pus a mão no chão, no chão dela, no frio dela. Meu corpo brilhou e pedi ao gelo, e o gelo me fez a cortesia de obedecer.</p>
+
+    <p>A crosta sob os três Tacets se abriu.</p>
+  <div class="scene-wrap">
+    <button class="scene-cue" data-video="assets/video/tacets-ice.mp4">
+      <span class="sc-thumb"><span class="sc-play-ico"><svg viewBox="0 0 10 10"><polygon points="1,0 10,5 1,10"/></svg></span></span>
+      <span class="sc-label" data-en="Watch the scene" data-pt="Ver a cena">Watch the scene</span>
+    </button>
+  </div>
+
+
+    <p>Não com fúria — com lógica. Uma fenda reta, limpa, geométrica, do jeito que a minha gente gostava das coisas, e os três caíram pelo rasgo na água escura por baixo, o compasso a virar estrondo, o bronze a engolir o frio negro que nem o bronze atravessa a nado.</p>
+
+    <p>Não os destruí. Bronze daqueles não se afoga; vão andar pelo fundo, cegos, e um dia subir por uma margem qualquer e recomeçar o compasso.</p>
+
+    <p>Foi então que pensei em Gromm — nos cacos de bronze espalhados pelo chão do seu aposento, no sangue, na pedra que quase me acertou. Três Tacets não fazem tanto estrago. Deviam ser trinta, ou perto disso, e por algum motivo o líder Aug quis destruí-los antes que chegassem a mim. Nunca saberia ao certo. Desejei, sem poder dizer isso a ninguém, que ele estivesse melhor.</p>
+
+    <p>Entrei. Pus numa mochila o que cabe numa mochila quando se faz isto há um século: pouco. O álcool. Voltei à soleira uma última vez.</p>
+
+    <p>A oeste, sob o gelo, o frio tinha um peso conhecido. Ela estava perto, ou estivera, ou estaria. Com ela os tempos do verbo nunca foram firmes. Não disse adeus. Não se diz adeus a uma vizinha que vai durar mil anos depois de a nossa estrada ter virado pó; seria pretensão minha. Apenas olhei o norte branco uma vez, demoradamente, do jeito que se olha uma paisagem que no momento não se sente saudade, mas que sabe que sentirá nos anos à frente.</p>
+
+    <p>Depois virei as costas ao frio e desci para o sul, onde o mundo era mais morno e mais cheio de gente, e portanto mais perigoso.</p>
+
+    <p>Comecei a andar. À frente, a estrada; atrás, mais um lugar onde estive e que não foi meu. Pelo caminho, sem pressa, fui apagando a luz, uma linha de cada vez, e ensaiando o rosto seguinte, o de um homem velho e sem história, que ninguém mais cantaria sobre.</p>
+  </section>
+
+  <footer class="endmark">Fim do Capítulo I</footer>
+  </div>
+</main>
+
+<!-- AUDIO WIDGET -->
+<div class="audio-widget muted" id="audioWidget">
+  <button id="audioToggle" aria-label="Ligar ou desligar som ambiente">
+    <svg id="iconOn" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+    <svg id="iconOff" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+  </button>
+  <div class="zone-label">
+    <span data-en="Ambient sound" data-pt="Som ambiente">Ambient sound</span>
+    <b id="zoneLabel">Edge of the World</b>
+  </div>
+  <div class="bars" id="bars"><i></i><i></i><i></i></div>
+</div>
+
+<!-- CODEX MODAL -->
+<div class="codex-overlay" id="codexOverlay">
+  <div class="codex-card" id="codexCard">
+    <div class="codex-image-wrap">
+      <button class="codex-close" id="codexClose">✕</button>
+      <img class="codex-image-bg" id="codexImageBg" src="" alt="" aria-hidden="true">
+      <img class="codex-image" id="codexImage" src="" alt="">
+    </div>
+    <div class="codex-body">
+      <div class="codex-eyebrow" id="codexEyebrow">Codex</div>
+      <h3 class="codex-title" id="codexTitle">—</h3>
+      <div class="codex-pages" id="codexPages"></div>
+      <div class="codex-foot">
+        <button class="codex-nav" id="codexPrev" aria-label="Página anterior">‹</button>
+        <div class="codex-dots" id="codexDots"></div>
+        <button class="codex-nav" id="codexNext" aria-label="Próxima página">›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="audioBorda" src="assets/audio/borda-do-mundo-loop.mp3" loop preload="auto"></audio>
+<audio id="audioGlaciar" src="assets/audio/glaciar-oco-loop.mp3" loop preload="auto"></audio>
+<audio id="audioCabana" src="assets/audio/cabana-loop.mp3" loop preload="auto"></audio>
+<audio id="audioTacets" src="assets/audio/tacets-tension.mp3" loop preload="auto"></audio>
+<audio id="narrationPlayer" preload="none"></audio>
+
+<div class="video-overlay" id="videoOverlay">
+  <div class="video-card">
+    <button class="video-close" id="videoClose">✕</button>
+    <video id="scenePlayer" playsinline controls></video>
+  </div>
+</div>
+
+<script>
+/* ============ AUTO-LINK: liga TODA menção dos termos do codex ============ */
+const GLOSS_TERMS_EN = [
+  ['Edge of the World', 'borda-do-mundo'],
+  ['Hollow Glacier', 'glaciar-oco'],
+  ['Gelunah', 'gelunah'],
+  ['Lúmae', 'lumae'],
+  ['Augs', 'aug'],
+  ['Aug', 'aug'],
+];
+const GLOSS_TERMS_PT = [
+  ['Borda do Mundo', 'borda-do-mundo'],
+  ['Glaciar Oco', 'glaciar-oco'],
+  ['Gelunah', 'gelunah'],
+  ['Lúmae', 'lumae'],
+  ['Augs', 'aug'],
+  ['Aug', 'aug'],
+];
+
+function buildGlossMatcher(terms){
+  const map = new Map(terms);
+  const alt = terms.map(t => t[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
+  const re = new RegExp('(?<![\\p{L}\\p{N}])(' + alt + ')(?![\\p{L}\\p{N}])', 'gu');
+  return { map, re };
+}
+const GLOSS_EN = buildGlossMatcher(GLOSS_TERMS_EN);
+const GLOSS_PT = buildGlossMatcher(GLOSS_TERMS_PT);
+
+function autoLinkElement(el, excludeKey, lang){
+  const { map, re } = lang === 'pt' ? GLOSS_PT : GLOSS_EN;
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      if(!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      if(node.parentElement && node.parentElement.closest('.gloss')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const nodes = [];
+  let n;
+  while((n = walker.nextNode())) nodes.push(n);
+
+  nodes.forEach(node=>{
+    const text = node.nodeValue;
+    re.lastIndex = 0;
+    if(!re.test(text)) return;
+    re.lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let last = 0, m;
+    while((m = re.exec(text))){
+      const key = map.get(m[1]);
+      if(m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+      if(key === excludeKey){
+        frag.appendChild(document.createTextNode(m[1]));
+      } else {
+        const span = document.createElement('span');
+        span.className = 'gloss';
+        span.dataset.codex = key;
+        span.textContent = m[1];
+        frag.appendChild(span);
+      }
+      last = m.index + m[1].length;
+    }
+    if(last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+
+document.querySelectorAll('#langBlockEN section.zone p').forEach(p => autoLinkElement(p, null, 'en'));
+document.querySelectorAll('#langBlockPT section.zone p').forEach(p => autoLinkElement(p, null, 'pt'));
+
+/* ============ NEVE ============ */
+const snowCanvas = document.getElementById('snowCanvas');
+const ctx = snowCanvas.getContext('2d');
+let flakes = [];
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function sizeCanvas(){
+  snowCanvas.width = window.innerWidth * devicePixelRatio;
+  snowCanvas.height = window.innerHeight * devicePixelRatio;
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+}
+
+function initFlakes(){
+  const count = window.innerWidth < 640 ? 26 : 50;
+  flakes = Array.from({length:count}, ()=> ({
+    x: Math.random()*window.innerWidth,
+    y: Math.random()*window.innerHeight,
+    r: 1 + Math.random()*1.8,
+    speed: .28 + Math.random()*.5,
+    drift: Math.random()*Math.PI*2,
+    driftSpeed: .002 + Math.random()*.006,
+    driftAmp: 10 + Math.random()*18,
+    opacity: .18 + Math.random()*.32
+  }));
+}
+
+function drawSnow(){
+  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+  flakes.forEach(f=>{
+    f.y += f.speed;
+    f.drift += f.driftSpeed;
+    const x = f.x + Math.sin(f.drift) * f.driftAmp * 0.02;
+    if(f.y > window.innerHeight + 4){ f.y = -4; f.x = Math.random()*window.innerWidth; }
+    ctx.beginPath();
+    ctx.arc(x, f.y, f.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(232,238,242,${f.opacity})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawSnow);
+}
+
+if(!prefersReducedMotion){
+  sizeCanvas();
+  initFlakes();
+  requestAnimationFrame(drawSnow);
+  window.addEventListener('resize', ()=>{ sizeCanvas(); initFlakes(); });
+}
+
+/* ============ CODEX DATA ============ */
+const CODEX_EN = {
+  "gelunah": {
+    title: "Gelunah",
+    eyebrow: "Zealot Dragon · White Mantle",
+    image: "assets/images/codex-gelunah.webp",
+    accent: "gold",
+    pages: [
+      [
+        "Gelunah is one of five zealot dragons who govern the world's climate. She is the regent of the White Mantle, the frozen territory to the north of all that is known — absolute mistress of ice and silence."
+      ],
+      [
+        "Her form is majestic and terrible: white scales with the exact texture of freshly formed ice, layered like the plates of a living armor. Her wings, when spread, reveal fine cracks that shimmer like veins of quartz under the weak northern light, as if the cold itself had cracked while stretching.",
+        "Her eyes are a deep blue tinged with violet, carrying a constant melancholy — the weariness of centuries watching over a realm where nothing grows. She is estimated at roughly 600 meters in length, from snout to tail-tip, making her the largest living creature in the White Mantle."
+      ],
+      [
+        "She is worshipped as a deity by the Children of Winter, a small human settlement that defies the cold to live near the Mother of Winter. They are a peaceful people, seeking spirituality in the harshness of the landscape.",
+        "Their strictest laws concern procreation: they believe every new mouth is a promise of hunger, and that when hunting and fishing grow scarce, it is because Gelunah herself goes without food — and a hungry dragon makes the cold deadly. The Children of Winter do not fear her; they understand her as a force of nature, as inevitable as snow."
+      ],
+      [
+        "Further north, where the cold grows so intense that humans dare not tread, Gelunah is also revered by the <span class=\"gloss\" data-codex=\"aug\">Aug</span>. The giants, however, make no pilgrimages, offer no prayers. They simply know she exists, and that her mood is the weather. When Gelunah grows restless, even the Aug retreat into the <span class=\"gloss\" data-codex=\"glaciar-oco\">Hollow Glacier</span> and wait."
+      ],
+      [
+        "Her resting place is the Tomb of Ardor — a depression in the perpetual ice where the cold reaches such intensity that the sensation on the body is no longer one of cold, but of burning. It is the once-in-a-lifetime pilgrimage destination for the Children of Winter: a journey few complete, and from which none return the same.",
+        "It is said that, in that place, the air is so dense and frigid that every breath feels like swallowing shards of glass, and the silence is so absolute one can hear one's own blood circulating."
+      ]
+    ]
+  },
+  "aug": {
+    title: "Aug",
+    eyebrow: "Race of giants · White Mantle",
+    image: "assets/images/codex-aug.webp",
+    accent: "turq",
+    pages: [
+      [
+        "The Aug are a race of giants inhabiting the White Mantle, standing an estimated near-4 meters tall. Their build is broad and massive, with thick limbs and rough skin, covered by a sparse layer of pale fur that shields them from the cold.",
+        "They possess two stomachs — an adaptation that lets them digest everything from meat and frozen roots to stones, which they swallow to reach satiety when food runs scarce."
+      ],
+      [
+        "Their diet is seasonal: they eat once per season, consuming absurd quantities of food in a single feast that can last for days. After that meal, they enter a state of deep sleep that stretches on for weeks, or even an entire season, hibernating in the warmest chambers of the <span class=\"gloss\" data-codex=\"glaciar-oco\">Hollow Glacier</span> while their bodies slowly digest the accumulated stock."
+      ],
+      [
+        "The Aug are described by the Children of Winter as peaceful, though the same source admits to avoiding them. Not out of malice — the giants simply inspire an instinctive dread: their speech is slow, guttural, and made up of few words; their small, dark eyes seem to look straight through people, as if always half-asleep. They prefer silence and isolation, and rarely initiate contact with humans."
+      ],
+      [
+        "They are not numerous. Their reproduction is slow and ceremonial: they mate only in winter, in a ritual involving the consumption of great quantities of the liquor they brew themselves. It is during these brief festive periods that the Aug become louder and more expansive."
+      ]
+    ]
+  },
+  "lumae": {
+    title: "Lúmae",
+    eyebrow: "Near-extinct people",
+    image: "assets/images/codex-lumae.webp",
+    accent: "gold",
+    pages: [
+      [
+        "The Lúmae are a people with a great affinity for wielding magic without suffering the effects of madness usually associated with the practice. They possess near-translucent skin, beneath which run lines of golden light that intensify with the individual's mental activity.",
+        "They were the target of a massacre sponsored by the Four Wills, the creative forces of the World. They are, in theory, an extinct people, cursed by their own unrestrained use of magic."
+      ]
+    ]
+  },
+  "glaciar-oco": {
+    title: "Hollow Glacier",
+    eyebrow: "Aug settlement",
+    image: "assets/images/codex-glaciar-oco.webp",
+    accent: "turq",
+    pages: [
+      [
+        "The Hollow Glacier is the settlement of Aug society: a millennia-old glacier of turquoise-blue ice, so compact it creaks like stone underfoot. Across countless cycles of thaw and refreeze, nature itself carved a labyrinth of fissures, tunnels, and chambers into the glacier's belly — a shelter no <span class=\"gloss\" data-codex=\"aug\">Aug</span> ever needed to build, only to occupy."
+      ],
+      [
+        "The main entrance is a vertical fissure over six meters tall, wide enough for even the largest of the giants to pass through without bowing their heads. Inside, sunlight — when it manages to penetrate — filters through the thick ice, tinting the corridors in a greenish, aquatic hue, like the inside of a frozen wave.",
+        "During the long winter nights, seal-fat torches scattered along the walls cast dancing shadows that stretch through the tunnels."
+      ],
+      [
+        "The lower reaches of the glacier are warmed by geothermal fissures, staying damp and above freezing. There, water trickles in constant threads, forming small pools of meltwater where the Aug rest and prepare their seasonal meals. The upper tunnels, dry and frigid, function as natural meat stores, where sub-zero temperatures preserve the stockpiles for the long sleeping periods."
+      ],
+      [
+        "The Hollow Glacier is not a city — it is a refuge: vast, dark, creaking and groaning with every millimeter the ice shifts. For the Aug, it is the only home they know."
+      ]
+    ]
+  },
+  "borda-do-mundo": {
+    title: "Edge of the World",
+    eyebrow: "Region · White Mantle",
+    image: "assets/images/codex-borda-do-mundo.webp",
+    accent: "gold",
+    pages: [
+      [
+        "The Edge of the World is the northernmost region of the territory under <span class=\"gloss\" data-codex=\"gelunah\">Gelunah's</span> dominion, within the White Mantle. It becomes practically uninhabitable during certain periods, tied to shifts in Gelunah's temperament."
+      ],
+      [
+        "Temperatures range between –30°C and –45°C, with a dry, constant wind blowing off the frozen sea, cutting the skin like a dull blade. The snow is thin and coarse, like white sand crunching underfoot; the sky stays an eternal pearl-grey, with rare pale-blue rifts where the weak sun drags itself along for three or four hours before hiding again.",
+        "It is a perpetual winter, stable and predictable — except when Gelunah grows restless."
+      ]
+    ]
+  }
+};
+
+/* ============ CODEX DATA ============ */
+const CODEX_PT = {
+  "gelunah": {
+    title: "Gelunah",
+    eyebrow: "Dragã zeladora · Manto Branco",
+    image: "assets/images/codex-gelunah.webp",
+    accent: "gold",
+    pages: [
+      [
+        "Gelunah é uma dos cinco dragões zeladores que regem o clima do mundo. É a regente do Manto Branco, o território congelado ao norte de tudo o que é conhecido — senhora absoluta do gelo e do silêncio."
+      ],
+      [
+        "Sua forma é majestosa e terrível: escamas brancas com a textura exata do gelo recém-formado, sobrepondo-se como placas de uma armadura viva. Suas asas, quando abertas, revelam finas rachaduras que brilham como veios de quartzo sob a luz fraca do norte, como se o próprio frio tivesse se rachado ao se esticar.",
+        "Seus olhos são de um azul profundo tingido de violeta, e carregam uma melancolia constante — o cansaço de séculos vigiando um reino onde nada cresce. Estima-se que possua cerca de 600 metros de comprimento, da ponta do focinho à extremidade da cauda, tornando-a a maior criatura viva do Manto Branco."
+      ],
+      [
+        "É venerada como divindade pelos Filhos do Inverno, um pequeno assentamento humano que desafia o frio para viver próximo da Mãe do Inverno. São um povo pacífico, que busca espiritualidade na dureza da paisagem.",
+        "Suas leis mais rigorosas dizem respeito à procriação: acreditam que cada nova boca é uma promessa de fome, e que quando a caça e a pesca se tornam escassas, é porque falta comida para Gelunah — e a fome da dragã torna o frio mortal. Os Filhos do Inverno não a temem; eles a compreendem como uma força natural, tão inevitável quanto a neve."
+      ],
+      [
+        "Mais ao norte, onde o frio se torna tão intenso que os humanos não ousam pisar, Gelunah também é reverenciada pelos Aug. Os gigantes, porém, não fazem peregrinações nem rezam. Limitam-se a saber que ela existe, e que seu humor é o clima. Quando Gelunah se agita, até os Aug se recolhem ao Glaciar Oco e esperam."
+      ],
+      [
+        "Seu local de descanso é o Túmulo do Ardor — uma depressão no gelo perpétuo onde o frio atinge tamanha intensidade que a sensação no corpo não é mais de frio, mas de queimadura. É o destino de peregrinação única na vida dos Filhos do Inverno: uma jornada que poucos completam, e da qual nenhum volta o mesmo.",
+        "Dizem que, naquele lugar, o ar é tão denso e gelado que cada respiração parece engolir estilhaços de vidro, e que o silêncio é tão absoluto que se pode ouvir o próprio sangue circulando."
+      ]
+    ]
+  },
+  "aug": {
+    title: "Aug",
+    eyebrow: "Raça de gigantes · Manto Branco",
+    image: "assets/images/codex-aug.webp",
+    accent: "turq",
+    pages: [
+      [
+        "Os Aug são uma raça de gigantes que habita o Manto Branco, com altura estimada em quase 4 metros. Sua fisionomia é larga e maciça, com membros grossos e pele áspera, coberta por uma camada esparsa de pelos claros que os protege do frio.",
+        "Possuem dois estômagos — uma adaptação que lhes permite digerir desde carne e raízes congeladas até pedras, que engolem para atingir a saciação quando a comida escasseia."
+      ],
+      [
+        "Sua alimentação é sazonal: alimentam-se uma vez por estação, consumindo quantidades absurdas de comida num único banquete que pode durar dias. Após essa refeição, entram em um estado de sono profundo que se estende por semanas ou mesmo por uma estação inteira, hibernando nas câmaras mais quentes do Glaciar Oco enquanto o corpo digere lentamente o estoque acumulado."
+      ],
+      [
+        "Os Aug são descritos pelos Filhos do Inverno como pacíficos, mas a mesma fonte admite que os evitam. Não por maldade — os gigantes simplesmente inspiram um temor instintivo: sua fala é lenta, gutural e composta de poucas palavras; seus olhos pequenos e escuros parecem olhar através das pessoas, como se estivessem sempre meio sonolentos. Preferem o silêncio e o isolamento, e raramente iniciam contato com humanos."
+      ],
+      [
+        "Não são numerosos. Sua reprodução é lenta e cerimonial: acasalam apenas no inverno, em um ritual que envolve o consumo de grandes quantidades da bebida alcoólica que eles mesmos produzem. É durante esses breves períodos de festa que os Aug se tornam mais barulhentos e expansivos."
+      ]
+    ]
+  },
+  "lumae": {
+    title: "Lúmae",
+    eyebrow: "Povo quase extinto",
+    image: "assets/images/codex-lumae.webp",
+    accent: "gold",
+    pages: [
+      [
+        "Os Lúmae são um povo com grande afinidade em utilizar magia sem sofrer efeitos de insanidade associados a essa prática. Possuem uma pele quase translúcida, sob a qual correm linhas de luz dourada que se intensificam conforme a atividade mental do indivíduo.",
+        "Foram alvo de um massacre patrocinado pelas Quatro Vontades, forças criadoras do mundo. São, teoricamente, um povo extinto, amaldiçoados pelo uso desenfreado de magia."
+      ]
+    ]
+  },
+  "glaciar-oco": {
+    title: "Glaciar Oco",
+    eyebrow: "Assentamento dos Aug",
+    image: "assets/images/codex-glaciar-oco.webp",
+    accent: "turq",
+    pages: [
+      [
+        "O Glaciar Oco é o assentamento da sociedade Aug: uma geleira milenar de gelo azul-turquesa, tão compacta que range como pedra sob os pés. Ao longo de incontáveis ciclos de degelo e recongelamento, a própria natureza esculpiu um labirinto de fendas, túneis e câmaras no ventre da geleira — um abrigo que nenhum Aug precisou construir, apenas ocupar."
+      ],
+      [
+        "A entrada principal é uma fenda vertical com mais de seis metros de altura, larga o bastante para que até o maior dos gigantes passe sem curvar a cabeça. Lá dentro, a luz do sol — quando consegue penetrar — filtra-se através do gelo espesso, tingindo os corredores num tom esverdeado e aquático, como o interior de uma onda congelada.",
+        "Durante as longas noites de inverno, tochas de gordura de foca espalhadas pelas paredes criam danças de sombras que se esticam pelos túneis."
+      ],
+      [
+        "As partes mais baixas da geleira são aquecidas por fendas geotérmicas, mantendo-se úmidas e acima do ponto de congelamento. Ali, a água escorre em filetes constantes, formando pequenos lagos de água derretida onde os Aug descansam e preparam suas refeições sazonais. Os túneis superiores, secos e gélidos, funcionam como depósitos naturais de carne, onde a temperatura negativa preserva os estoques para os longos períodos de sono."
+      ],
+      [
+        "O Glaciar Oco não é uma cidade — é um refúgio: amplo, escuro, rangendo e gemendo a cada milímetro que o gelo se move. Para os Aug, é o único lar que conhecem."
+      ]
+    ]
+  },
+  "borda-do-mundo": {
+    title: "Borda do Mundo",
+    eyebrow: "Região · Manto Branco",
+    image: "assets/images/codex-borda-do-mundo.webp",
+    accent: "gold",
+    pages: [
+      [
+        "A Borda do Mundo é a região mais setentrional do território sob domínio de Gelunah, dentro do Manto Branco. Torna-se praticamente inabitável em determinados períodos, associados a alterações no comportamento de Gelunah."
+      ],
+      [
+        "As temperaturas oscilam entre –30°C e –45°C, com um vento seco e constante que vem do mar congelado, cortando a pele como uma lâmina cega. A neve é fina e áspera, parecendo areia branca que range sob os pés; o céu permanece num cinza-perolado eterno, com raras fendas de um azul pálido onde o sol fraco se arrasta por três ou quatro horas antes de se esconder.",
+        "É um inverno perpétuo, estável e previsível — exceto quando Gelunah se agita."
+      ]
+    ]
+  }
+};
+
+/* ============ CODEX MODAL LOGIC ============ */
+const overlay = document.getElementById('codexOverlay');
+const cardEl = document.getElementById('codexCard');
+const imgEl = document.getElementById('codexImage');
+const imgBgEl = document.getElementById('codexImageBg');
+const titleEl = document.getElementById('codexTitle');
+const eyebrowEl = document.getElementById('codexEyebrow');
+const pagesEl = document.getElementById('codexPages');
+const dotsEl = document.getElementById('codexDots');
+const prevBtn = document.getElementById('codexPrev');
+const nextBtn = document.getElementById('codexNext');
+
+let currentEntry = null;
+let currentPage = 0;
+
+let currentLang = 'en';
+
+function openCodex(key){
+  const CODEX = currentLang === 'pt' ? CODEX_PT : CODEX_EN;
+  const entry = CODEX[key];
+  if(!entry){ return; }
+  currentEntry = entry;
+  currentPage = 0;
+  imgEl.src = entry.image;
+  imgEl.alt = entry.title;
+  imgBgEl.src = entry.image;
+  titleEl.textContent = entry.title;
+  eyebrowEl.textContent = entry.eyebrow;
+  cardEl.style.setProperty('--codex-accent', entry.accent === 'turq' ? 'var(--turq)' : 'var(--gold)');
+
+  pagesEl.innerHTML = '';
+  dotsEl.innerHTML = '';
+  entry.pages.forEach((page, i)=>{
+    const div = document.createElement('div');
+    div.className = 'codex-page' + (i===0 ? ' active' : '');
+    div.innerHTML = page.map(t=>`<p>${t}</p>`).join('');
+    pagesEl.appendChild(div);
+
+    const dot = document.createElement('span');
+    if(i===0) dot.className='active';
+    dotsEl.appendChild(dot);
+  });
+
+  updateNav();
+  autoLinkElement(pagesEl, key, currentLang);
+  overlay.classList.add('open');
+}
+
+function updateNav(){
+  const pages = pagesEl.querySelectorAll('.codex-page');
+  pages.forEach((p,i)=> p.classList.toggle('active', i===currentPage));
+  dotsEl.querySelectorAll('span').forEach((d,i)=> d.classList.toggle('active', i===currentPage));
+  prevBtn.disabled = currentPage === 0;
+  nextBtn.disabled = currentPage === pages.length - 1;
+}
+
+function closeCodex(){ overlay.classList.remove('open'); }
+
+document.getElementById('codexClose').addEventListener('click', closeCodex);
+overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeCodex(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeCodex(); });
+
+prevBtn.addEventListener('click', ()=>{ if(currentPage>0){ currentPage--; updateNav(); } });
+nextBtn.addEventListener('click', ()=>{
+  const total = pagesEl.querySelectorAll('.codex-page').length;
+  if(currentPage < total-1){ currentPage++; updateNav(); }
+});
+
+document.addEventListener('click', (e)=>{
+  const g = e.target.closest('.gloss');
+  if(g){ e.preventDefault(); openCodex(g.dataset.codex); }
+});
+
+/* ============ AUDIO SYSTEM ============ */
+const audioBorda = document.getElementById('audioBorda');
+const audioGlaciar = document.getElementById('audioGlaciar');
+const audioCabana = document.getElementById('audioCabana');
+const audioTacets = document.getElementById('audioTacets');
+const audioToggle = document.getElementById('audioToggle');
+const iconOn = document.getElementById('iconOn');
+const iconOff = document.getElementById('iconOff');
+const zoneLabel = document.getElementById('zoneLabel');
+const widget = document.getElementById('audioWidget');
+const enterBtn = document.getElementById('enterBtn');
+const enterState = document.getElementById('enterState');
+
+let audioEnabled = false;
+let currentZone = 'borda';
+let oneShotTimer = null;
+
+const ZONE_NAMES = {
+  en: { borda: 'Edge of the World', glaciar: 'Hollow Glacier', cabana: "Aheryn's Cabin", tacets: 'The Pursuit' },
+  pt: { borda: 'Borda do Mundo', glaciar: 'Glaciar Oco', cabana: 'A Cabana', tacets: 'A Perseguição' }
+};
+const ONE_SHOTS = {
+  borda: 'assets/audio/corvos.mp3',
+  glaciar: 'assets/audio/gelo-quebrando.mp3'
+};
+
+let duckActive = false;
+const DUCK_FACTOR = 0.82; // diminuição bem sutil quando a narração toca
+const ZONE_BASE_VOLUME = { borda: .55, glaciar: .55, cabana: .32, tacets: .5 }; // cabana mais abafada, espaço fechado
+
+function setVolumes(zone, immediate){
+  const factor = duckActive ? DUCK_FACTOR : 1;
+  const targetBorda = zone === 'borda' ? ZONE_BASE_VOLUME.borda * factor : 0;
+  const targetGlaciar = zone === 'glaciar' ? ZONE_BASE_VOLUME.glaciar * factor : 0;
+  const targetCabana = zone === 'cabana' ? ZONE_BASE_VOLUME.cabana * factor : 0;
+  const targetTacets = zone === 'tacets' ? ZONE_BASE_VOLUME.tacets * factor : 0;
+  fadeTo(audioBorda, targetBorda, immediate ? 0 : 1400);
+  fadeTo(audioGlaciar, targetGlaciar, immediate ? 0 : 1400);
+  fadeTo(audioCabana, targetCabana, immediate ? 0 : 1400);
+  fadeTo(audioTacets, targetTacets, immediate ? 0 : 1400);
+}
+
+function fadeTo(el, target, duration){
+  const myFadeId = (el._fadeId = (el._fadeId || 0) + 1);
+  const start = el.volume;
+  const clampedTarget = Math.min(1, Math.max(0, target));
+  if(duration <= 0){ el.volume = clampedTarget; return; }
+  const t0 = performance.now();
+  function step(now){
+    if(el._fadeId !== myFadeId) return; // uma fade mais nova assumiu este elemento
+    const p = Math.min(1, (now - t0) / duration);
+    el.volume = Math.min(1, Math.max(0, start + (clampedTarget - start) * p));
+    if(p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function playOneShotSoon(){
+  clearTimeout(oneShotTimer);
+  const delay = 9000 + Math.random() * 14000; // 9s–23s, com variancia
+  oneShotTimer = setTimeout(()=>{
+    if(audioEnabled){
+      const src = ONE_SHOTS[currentZone];
+      if(src){
+        const a = new Audio(src);
+        a.volume = 0.4 + Math.random()*0.15;
+        a.play().catch(()=>{});
+      }
+    }
+    playOneShotSoon();
+  }, delay);
+}
+
+function updateZoneUI(zone){
+  currentZone = zone;
+  zoneLabel.textContent = ZONE_NAMES[currentLang][zone];
+  document.documentElement.style.setProperty('--zone-accent', zone==='glaciar' ? 'var(--turq)' : 'var(--gold)');
+  document.documentElement.style.setProperty('--zone-accent-soft', zone==='glaciar' ? 'var(--turq-soft)' : 'var(--gold-soft)');
+  snowCanvas.classList.toggle('dimmed', zone === 'cabana');
+  if(audioEnabled && !videoOpen) setVolumes(zone, false);
+}
+
+function enableAudio(){
+  audioEnabled = true;
+  audioBorda.volume = 0; audioGlaciar.volume = 0; audioCabana.volume = 0; audioTacets.volume = 0;
+  audioBorda.play().catch(()=>{});
+  audioGlaciar.play().catch(()=>{});
+  audioCabana.play().catch(()=>{});
+  audioTacets.play().catch(()=>{});
+  setVolumes(currentZone, false);
+  widget.classList.remove('muted');
+  iconOn.style.display=''; iconOff.style.display='none';
+  playOneShotSoon();
+}
+
+function disableAudio(){
+  audioEnabled = false;
+  fadeTo(audioBorda, 0, 500);
+  fadeTo(audioGlaciar, 0, 500);
+  fadeTo(audioCabana, 0, 500);
+  fadeTo(audioTacets, 0, 500);
+  widget.classList.add('muted');
+  iconOn.style.display='none'; iconOff.style.display='';
+  clearTimeout(oneShotTimer);
+}
+
+enterBtn.addEventListener('click', ()=>{
+  if(!audioEnabled){
+    enableAudio();
+    enterState.textContent = currentLang === 'pt' ? '✦ som ligado' : '✦ sound on';
+  }
+  document.querySelector('main').scrollIntoView({behavior:'smooth'});
+});
+
+audioToggle.addEventListener('click', ()=>{
+  if(audioEnabled){ disableAudio(); } else { enableAudio(); }
+});
+
+/* Zone detection via scroll */
+const zoneSections = document.querySelectorAll('section.zone');
+const io = new IntersectionObserver((entries)=>{
+  let best = null, bestRatio = 0;
+  entries.forEach(en=>{
+    if(en.intersectionRatio > bestRatio){ bestRatio = en.intersectionRatio; best = en.target; }
+  });
+  if(best){
+    const zone = best.dataset.zone;
+    if(zone !== currentZone) updateZoneUI(zone);
+  }
+}, { threshold:[0.15,0.3,0.5,0.7,0.9], rootMargin:'-15% 0px -15% 0px' });
+zoneSections.forEach(s=>io.observe(s));
+
+/* ============ LANGUAGE TOGGLE ============ */
+const langToggle = document.getElementById('langToggle');
+const langBlockEN = document.getElementById('langBlockEN');
+const langBlockPT = document.getElementById('langBlockPT');
+
+function setLanguage(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+  langBlockEN.classList.toggle('active', lang === 'en');
+  langBlockPT.classList.toggle('active', lang === 'pt');
+
+  langToggle.querySelectorAll('button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  document.querySelectorAll('[data-en][data-pt]').forEach(el=>{
+    if(el.id === 'enterState' && audioEnabled){
+      el.textContent = lang === 'pt' ? '✦ som ligado' : '✦ sound on';
+    } else {
+      el.textContent = lang === 'pt' ? el.dataset.pt : el.dataset.en;
+    }
+  });
+
+  zoneLabel.textContent = ZONE_NAMES[lang][currentZone];
+
+  document.title = lang === 'pt'
+    ? 'Aheryn — A Luz na Borda do Mundo · As Quatro Vontades'
+    : 'Aheryn — The Light at the Edge of the World · The Four Wills';
+
+  if(typeof stopNarration === 'function') stopNarration();
+  closeCodex();
+}
+
+langToggle.addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-lang]');
+  if(btn) setLanguage(btn.dataset.lang);
+});
+
+/* ============ NARRATION (voz do Aheryn) ============ */
+const narrationPlayer = document.getElementById('narrationPlayer');
+const narrationCues = document.querySelectorAll('.narration-cue');
+let activeCueBtn = null;
+
+function setDuck(on){
+  duckActive = on;
+  setVolumes(currentZone, false);
+}
+
+function stopNarration(){
+  narrationPlayer.pause();
+  narrationPlayer.currentTime = 0;
+  if(activeCueBtn) activeCueBtn.classList.remove('playing');
+  activeCueBtn = null;
+  setDuck(false);
+}
+
+narrationCues.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const isThisPlaying = btn.classList.contains('playing');
+    if(isThisPlaying){
+      stopNarration();
+      return;
+    }
+    stopNarration();
+    narrationPlayer.src = btn.dataset.audio;
+    narrationPlayer.play().catch(()=>{});
+    btn.classList.add('playing');
+    activeCueBtn = btn;
+    setDuck(true);
+  });
+});
+
+narrationPlayer.addEventListener('ended', stopNarration);
+
+const cueObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      en.target.classList.add('visible');
+      cueObserver.unobserve(en.target);
+    }
+  });
+}, { threshold:.4 });
+narrationCues.forEach(c=>cueObserver.observe(c));
+
+/* ============ VIDEO SCENES ============ */
+const videoOverlay = document.getElementById('videoOverlay');
+const scenePlayer = document.getElementById('scenePlayer');
+const videoClose = document.getElementById('videoClose');
+let ambientWasEnabled = false;
+let videoOpen = false;
+
+function openScene(src){
+  stopNarration();
+  videoOpen = true;
+  ambientWasEnabled = audioEnabled;
+  if(audioEnabled){ fadeTo(audioBorda, 0, 500); fadeTo(audioGlaciar, 0, 500); fadeTo(audioCabana, 0, 500); fadeTo(audioTacets, 0, 500); }
+  scenePlayer.src = src;
+  videoOverlay.classList.add('open');
+  scenePlayer.currentTime = 0;
+  scenePlayer.play().catch(()=>{});
+}
+
+function closeScene(){
+  scenePlayer.pause();
+  videoOverlay.classList.remove('open');
+  scenePlayer.removeAttribute('src');
+  scenePlayer.load();
+  videoOpen = false;
+  if(ambientWasEnabled) setVolumes(currentZone, false);
+}
+
+document.querySelectorAll('.scene-cue').forEach(btn=>{
+  btn.addEventListener('click', ()=> openScene(btn.dataset.video));
+});
+videoClose.addEventListener('click', closeScene);
+videoOverlay.addEventListener('click', (e)=>{ if(e.target === videoOverlay) closeScene(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && videoOverlay.classList.contains('open')) closeScene(); });
+</script>
+</body>
+</html>
